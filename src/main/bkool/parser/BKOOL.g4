@@ -21,10 +21,29 @@ program: ;
 
 // 4. TYPE
 // PRIMITIVE TYPE
+not_void_type: INT | FLOAT | BOOLEAN | STRING;
+void_type: VOID;
+prim_type: not_void_type | void_type;
 
 // ARRAY TYPE
+arr_type: not_void_type LSB INT_LIT RSB;
 
 // CLASS TYPE
+
+// 5. EXPRESSION
+expr: expr1 (LESS | LESS_OR_EQUAL | GREATER | GREATER_OR_EQUAL) expr1 | expr1;
+expr1: expr2 (EQUAL | NOT_EQUAL) expr2 | expr2;
+expr2: expr2 (AND | OR) expr3 | expr3;
+expr3: expr3 (ADDOP | SUBOP) expr4 | expr4;
+expr4: expr4 (MULOP | FLOAT_DIV | INTEGER_DIV | MOD) expr5 | expr5;
+expr5: expr5 (CONCATENATION) expr6 | expr6;
+expr6: NOT expr6 | expr7;
+expr7: expr8 (ADDOP | SUBOP) expr7 | expr8;
+expr8: expr9 LSB expr RSB | expr9;
+expr9: expr9 DOT ID (LB exprlist? RB)? | ID DOT ID (LB exprlist? RB)?;
+expr10: NEW ID LB exprlist? RB; 
+
+exprlist: expr COMMA exprlist | expr COMMA;
 
 // 3. LEXICAL STRUCTURE
 // COMMENT
@@ -95,9 +114,12 @@ FLOAT_LIT:
 		DIGIT+ DECIMAL
 		| DIGIT+ EXPONENT
 		| DIGIT+ DECIMAL EXPONENT;
-STR_LIT: '"' CHAR* '"';
-
-// 5. EXPRESSION
+STR_LIT: '"' CHAR* '"' {
+	self.text = self.text[:];
+};
+arr_lit: LP arr_decl RP;
+arr_decl: arr_val COMMA arr_decl | arr_val;
+arr_val: (INT_LIT | bool_lit | FLOAT_LIT | STR_LIT);
 
 // 6. STATEMENT
 
@@ -111,8 +133,8 @@ fragment LETTER: [a-zA-Z];
 fragment DIGIT: [0-9];
 fragment DECIMAL: DOT DIGIT*;
 fragment EXPONENT: [eE] (ADDOP | SUBOP)? DIGIT+;
-fragment CHAR: ~;
-fragment SPECIAL_CHAR: '\\' [bfrnt"\\];
+fragment CHAR: ESC_SEQ | ~[\b\f\r\n\t"\\];
+fragment ESC_SEQ: '\\' [bfrnt"\\];
 
 // IDENTIFIER
 ID: (UNDERSCORE | LETTER) (UNDERSCORE | LETTER | DIGIT)*;
