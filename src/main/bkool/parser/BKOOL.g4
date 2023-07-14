@@ -10,7 +10,7 @@ options{
 	language=Python3;
 }
 
-program: ;
+program: (class_decl)* EOF;
 
 // 2. PROGRAM STRUCTURE
 // CLASS DECLARATION
