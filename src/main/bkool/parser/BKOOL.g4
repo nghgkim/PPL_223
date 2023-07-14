@@ -58,10 +58,16 @@ expr11: LB expr RB | ID | literal | THIS | NIL;
 exprlist: expr COMMA exprlist | expr COMMA;
 
 // 6. STATEMENT
-stmt: block_stmt | assignment_decl;
+stmt: block_stmt | assignment_decl | if_stmt | for_stmt | break_stmt | continue_stmt | return_stmt;
 block_stmt: LP mem_stmt? RP;
 mem_stmt: (FINAL? var_decl)* stmt*;
 assignment_decl: (ID | expr8) ASSIGN expr SEMI;
+if_stmt: IF expr THEN stmt (ELSE stmt)?;
+for_stmt: FOR ID ASSIGN expr (TO | DOWNTO) expr DO stmt;
+break_stmt: BREAK SEMI;
+continue_stmt: CONTINUE SEMI;
+return_stmt: RETURN expr SEMI;
+method_invocation_stmt: (ID | expr) DOT ID LB exprlist RB SEMI;
 
 // 3. LEXICAL STRUCTURE
 // COMMENT
@@ -134,7 +140,7 @@ FLOAT_LIT:
 		| DIGIT+ EXPONENT
 		| DIGIT+ DECIMAL EXPONENT;
 STR_LIT: '"' CHAR* '"' {
-	self.text = self.text[:];
+	self.text = self.text[1:-1];
 };
 arr_lit: LP arr_decl RP;
 arr_decl: arr_val COMMA arr_decl | arr_val;
@@ -152,17 +158,28 @@ fragment DECIMAL: DOT DIGIT*;
 fragment EXPONENT: [eE] (ADDOP | SUBOP)? DIGIT+;
 fragment CHAR: ESC_SEQ | ~[\b\f\r\n\t"\\];
 fragment ESC_SEQ: '\\' [bfrnt"\\];
+fragment ESC_ILLEGAL: '\\' ~([bfrnt"\\]) | ~'\\';
 
 // IDENTIFIER
 ID: (UNDERSCORE | LETTER) (UNDERSCORE | LETTER | DIGIT)*;
 
 /******************* Lexical Error *********************/
-
+UNCLOSE_STRING: '"' CHAR* ([\r\nEOF] | ~'"')
+{
+	err_char = ['\r','\n',EOFError]
+	if self.text[-1] in err_char:
+		raise UncloseString(self.text[1:-1])
+	else:
+		raise UncloseString(self.text[1:])
+};
+ILLEGAL_ESCAPE: '"' CHAR* ESC_ILLEGAL
+{
+	raise IllegalEscape(self.text[1:])
+};
+ERROR_CHAR: . 
+{
+	raise ErrorToken(self.text)
+};
 
 /*******************************************************/
 WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
-
-
-ERROR_CHAR: .;
-UNCLOSE_STRING: .;
-ILLEGAL_ESCAPE: .;
