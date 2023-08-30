@@ -1,1 +1,1 @@
-38,n,"[#Ffs?0ED",0.,Unclosed String: "T`#!7n
+for,x,:=,5,downto,2,do,io,.,writeIntLn,(,x,),;,<EOF>

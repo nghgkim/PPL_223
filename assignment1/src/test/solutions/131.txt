@@ -1,1 +1,1 @@
-Unclosed String: " hello lexer
+sList,.,addNode,(,4,),;,sList,.,searchNode,(,2,),;,sList,.,searchNode,(,7,),;,<EOF>

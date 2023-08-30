@@ -1,1 +1,1 @@
-Illegal Escape In String: "t \{
+int,x1,=,_1,;,int,_,=,12,;,int,_1,=,52,;,<EOF>

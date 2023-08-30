@@ -1,1 +1,3 @@
- !xyz 45**4290=12 a<>b+2^3 c-=d) x=y
+
+    val parent := node.getParent(); return null;
+        

@@ -1,4 +1,3 @@
 
-                for (int a ; b = 2 && c = 2; 2**2)
-                break
-                
+        self.check("(?=a)*?ab|ac_","ac_","0\n");
+        

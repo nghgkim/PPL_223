@@ -1,1 +1,1 @@
-class,A,{,void,x,(,),{,},},class,B,extends,A,{,void,x,(,),{,},},<EOF>
+Error on line 2 col 2: void

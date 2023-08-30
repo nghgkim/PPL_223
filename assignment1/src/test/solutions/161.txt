@@ -1,1 +1,1 @@
-BOOLean,Int,INTeger,STRING,whiLE,If,foR,Float,Void,VOID,Break,BREAK,CONtinue,CONTINUE,True,TRUE,FALSE,<EOF>
+a,[,3,+,x,.,foo,(,2,),],:=,a,[,b,[,2,],],+,3,;,<EOF>

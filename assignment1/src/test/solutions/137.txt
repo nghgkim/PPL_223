@@ -1,1 +1,1 @@
-"Backspace  \b","Formfeed   \f","Return     \r","Newline    \n","Tab        \t","Double quote       \"","Backslash  \\ ",<EOF>
+String,original,,,reverse,=,"",;,int,length,=,0,;,Scanner,in,=,new,Scanner,(,System,.,in,),;,<EOF>

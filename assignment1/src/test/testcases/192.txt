@@ -1,10 +1,6 @@
 
-    class Shape {
-    float length,width;
-    float getArea() {}
-    Shape(float length,width){
-    this.length := length;
-    this.width := width;
-    }
-    }
-                
+ if (year % 400 == 0) || (( year % 4 == 0 ) && ( year % 100 != 0)) then
+{
+  io.format("\n %d is a Leap Year. \n", year);
+}
+        

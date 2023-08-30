@@ -1,1 +1,1 @@
-<EOF>
+class,Hello,{,s,void,main,(,StringArray,args,),{,io,.,print,(,"Hello, World!",),;,},},<EOF>

@@ -1,1 +1,3 @@
-hakasjdklsajdkla*()*)%!++(+)|*()
+
+    (" The ASCII value of " + i.toChar() + "=" + i);
+        

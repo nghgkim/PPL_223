@@ -1,1 +1,1 @@
-Unclosed String: "String with newline
+io,.,format,(," The Area of a Rectangle = %.2f\n",,,Area,),;,<EOF>

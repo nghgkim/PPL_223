@@ -1,1 +1,3 @@
-cost = sum((y - h(i))**2)
+
+    if flag then io.writeStrLn("Expression is true");
+        

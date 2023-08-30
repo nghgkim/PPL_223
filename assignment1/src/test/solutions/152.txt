@@ -1,1 +1,1 @@
-a,=,a,Error Token ~
+io,.,app,build,log,:=,"https://web.com/abc123",<EOF>

@@ -1,7 +1,6 @@
-
-    /***************************    *                           *
-    * This is the comment body. *
-    * Variation Two.            *
-    *                           *
-    \***************************/
-                
+class Main{
+  void show()
+  {
+    System.out.println("Welcome to BKOOL");
+  }
+}

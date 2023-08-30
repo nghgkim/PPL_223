@@ -1,1 +1,1 @@
-classX,{,void,print,(,string,str,),{,io,.,writeString,(,str,),;,},void,main,(,),{,this,.,print,(,"",;,},},<EOF>
+for,i,:=,1,to,number,do,{,io,.,print,(,i,.,toString,(,),^,"\t",),;,},<EOF>

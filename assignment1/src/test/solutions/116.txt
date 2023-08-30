@@ -1,1 +1,1 @@
-is,multiple,lines,<EOF>
+io,.,print,(,"Not Equal",+,x,.,equals,(,y,),),;,io,.,print,(,"Equal",+,x,.,equals,(,123.45555,),),;,<EOF>

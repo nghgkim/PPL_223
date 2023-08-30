@@ -1,1 +1,1 @@
-Unclosed String: "Newline
+if,head,==,nil,then,{,head,:=,newNode,;,tail,:=,newNode,;,},<EOF>

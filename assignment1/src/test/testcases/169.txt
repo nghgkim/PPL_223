@@ -1,1 +1,3 @@
-truE TRUE tRUe
+
+        else io.writeStrLn ("Expression is false");
+        

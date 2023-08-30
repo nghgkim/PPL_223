@@ -1,1 +1,3 @@
- ;,[](){}%+-=====*/@asnakncslka&*))(_h
+
+    String expression = "var is_primitive_literal = a + b()";
+        

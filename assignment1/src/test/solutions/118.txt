@@ -1,1 +1,1 @@
-<,!,-,-,begin,Error Token &
+class,ObjectComparison,{,s,void,main,(,ArrayString,args,),{,},},<EOF>

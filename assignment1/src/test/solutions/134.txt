@@ -1,1 +1,1 @@
-s,=,Unclosed String: "string          '
+if,head,==,nil,then,{,head,:=,newNode,;,tail,:=,newNode,;,},else,{,tail,.,next,:=,newNode,;,tail,:=,newNode,;,},<EOF>

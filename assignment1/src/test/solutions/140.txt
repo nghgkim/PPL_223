@@ -1,1 +1,1 @@
-Illegal Escape In String: " Hi Hi \s
+int,count,=,0,;,String,str,=,"Banana,\n carrot,\n potato.",;,<EOF>

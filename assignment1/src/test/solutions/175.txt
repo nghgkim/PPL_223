@@ -1,1 +1,1 @@
-not,<,>=,and,>=,mod,<=,-,and,!=,or,&&,^,^,<EOF>
+if,self,.,bool_of_string,(,"true",),then,{,a,:=,self,.,string_to_int,(,io,.,read,(,),),;,b,:=,self,.,int_to_float,(,a,),+,2.0,;,},<EOF>

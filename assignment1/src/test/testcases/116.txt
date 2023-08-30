@@ -1,5 +1,4 @@
 
-    # inline comment  	
-        is multiple lines
-    # inline comment
-    
+    io.print("Not Equal" + x.equals(y));
+io.print("Equal" + x.equals(123.45555));
+        

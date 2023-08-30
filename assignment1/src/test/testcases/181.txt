@@ -1,1 +1,3 @@
-$no idea
+
+    self.autodetect(this.beans,AutodetectCapableMBeanInfoAssembler.getObject().assembler.includeBean);
+        

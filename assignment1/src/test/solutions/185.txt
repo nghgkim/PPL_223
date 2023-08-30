@@ -1,1 +1,1 @@
-+,,,or,b328b,=,<=,),G39be,Error Token ?
+frame,:=,new,JFrame,(,"HSDB - HotSpot Debugger",),;,frame,.,setSize,(,800,,,600,),;,<EOF>

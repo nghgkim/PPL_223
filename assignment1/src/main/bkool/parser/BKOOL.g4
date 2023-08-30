@@ -1,172 +1,366 @@
-// ID: 2111617
-
 grammar BKOOL;
 
 @lexer::header {
 from lexererr import *
 }
 
-options {
-	language = Python3;
-}
 
-program: (class_declare)+ EOF;
+program: class_decl+ EOF;
 
-// 2.Program Structure
+/*** Class declaration ***/
+class_decl: CLASS ID (EXTENDS ID)? class_mem;
+class_mem: LCB class_mem_list RCB;
+class_mem_list: (class_mem_decl class_mem_list) | ;
+class_mem_decl
+    : method_decl
+    | const_attr_decl
+    | static_attr_decl
+    | static_const_attr_decl
+    | attr_decl
+    | constructor_decl
+    ;
 
-class_declare: CLASS ID ( EXTENDS ID)? LP members* RP;
-members: (attribute_declare | method_declare);
+/*** Attribute declaration ***/
+attr_decl: decl_type attr_decl_list SEMI;
+const_attr_decl: FINAL decl_type attr_decl_list SEMI;
+static_attr_decl: STATIC decl_type attr_decl_list SEMI;
+static_const_attr_decl
+    : FINAL STATIC decl_type attr_decl_list SEMI
+    | STATIC FINAL decl_type attr_decl_list SEMI
+    ;
+attr_decl_list: attr_decl_unit COMMA attr_decl_list | attr_decl_unit;
+attr_decl_unit: ID (INIT expr)?;
 
-// Atrribute
+/*** Method declaration ***/
+method_decl: STATIC? class_type ID LP param_list RP block_stmt;
+param_list: param_decl | ;
+param_decl: param SEMI param_decl | param;
+param: decl_type idlist;
+idlist: ID COMMA idlist | ID;
 
-attribute_declare: (STATIC | FINAL | FINAL STATIC | STATIC FINAL)? var_decl;
-var_decl: (immutable_attribute | mutable_attribute) SEMI;
-immutable_attribute: data_type attribute;
-mutable_attribute: data_type attribute;
+/*** Constructor ***/
+constructor_decl: ID LP param_list RP block_stmt;
+
+class_type
+    : decl_type
+    | VOID
+    ;
+
+decl_type
+    : primitive_type
+    | array_type
+    | ID
+    ;
+
+primitive_type
+    : INT
+    | FLOAT
+    | STRING
+    | BOOLEAN
+    ;
+array_type: (primitive_type | ID) LSB INTLIT RSB;
+
+/*** Statement ***/
+stmt
+    : block_stmt
+    | assign_stmt
+    | if_stmt
+    | for_stmt
+    | break_stmt
+    | continue_stmt
+    | return_stmt
+    | method_invocation_stmt
+    ;
+
+// Block statement
+block_stmt:
+    LCB
+        local_var_decls?
+        stmts?
+    RCB;
+
+local_var_decls: local_var_decl local_var_decls | local_var_decl;
+local_var_decl: (var_decl | const_decl);
+var_decl: decl_type decl_list SEMI;
+const_decl: FINAL decl_type decl_list SEMI;
+decl_list: decl_unit COMMA decl_list | decl_unit;
+decl_unit: ID (INIT expr)?;
+
+stmts: stmt stmts | stmt;
+
+// Assignment statement
+assign_stmt: lhs ASSIGN expr SEMI;
+
+lhs: LP lhs RP | lhs_unit;
+lhs_unit
+    : ID
+    | lhs_index_expr
+    | lhs_member_access_expr
+    ;
+lhs_member_access_expr
+    : expr11 bop=DOT (method_call)
+    | expr11 bop=DOT (ID)
+    ;
+lhs_index_expr: expr10 (LSB expr RSB);
+
+// If statement
+if_stmt: if_then_stmt | if_then_else_stmt;
+if_then_else_stmt: IF expr THEN stmt ELSE stmt;
+if_then_stmt: IF expr THEN stmt;
+
+// For statement
+for_stmt: FOR (ID ASSIGN expr) (TO | DOWNTO) expr DO stmt;
+
+// Break statement
+break_stmt: BREAK SEMI;
+
+// Continue statement
+continue_stmt: CONTINUE SEMI;
+
+// Return statement
+return_stmt: RETURN expr SEMI;
 
 // Method
+method_invocation_stmt: expr DOT method_call SEMI;
 
-method_declare: (STATIC) (data_type | VOID) ID LB paralist RB block_statement | (data_type | VOID)? ID LB paralist RB block_statement;
+/*** Expression ***/
+expr: expr1;
 
-// 5.Expressions
+expr1
+    : expr2
+    (   LT
+    |   GT
+    |   LTE
+    |   GTE
+    ) expr2
+    | expr2
+    ;
 
-expr: expr1 (LT | GT | LE | GE) expr1 | expr1;
-expr1: expr2 (EQUAL | NOT_EQUAL) expr2 | expr2;
-expr2: expr2 (AND | OR) expr3 | expr3;
-expr3: expr3 ( ADD | SUB) expr4 | expr4;
-expr4: expr4 (MUL | DIV | MOD | INT_DIV) expr5 | expr5;
-expr5: expr5 (CONCATENATION) expr6 | expr6;
-expr6: NOT expr6 | expr7;
-expr7: (ADD | SUB) expr7 | expr8;
-expr8: expr9 LSB expr RSB | expr9;
-expr9: expr9 DOT ID (LB exprlist? RB)? | ID DOT ID (LB exprlist? RB)? | expr10;
-expr10: NEW ID LB (exprlist)? RB expr10? | expr11;
-expr11: LB expr RB | ID | literal | THIS | NIL;
-exprlist: expr COMMA exprlist | expr COMMA;
+expr2
+    : expr3
+    (   EQUAL
+    |   NE
+    ) expr3
+    | expr3
+    ;
 
-// 6.Statements
+expr3
+    : expr3
+    (   AND
+    |   OR
+    ) expr4
+    | expr4
+    ;
 
-statement: assignment_statement | if_statement | for_statement | break_statement | continue_statement | return_statement | method_invocation_statement | block_statement;
-block_statement: LP member_block? RP;
-member_block: (FINAL? var_decl)* statement+;
-assignment_statement: (ID | expr8) ASSINGMENT expr SEMI;
-if_statement: IF expr THEN statement (ELSE statement)?;
-for_statement: FOR ID ASSINGMENT expr (TO | DOWNTO) expr DO statement;
-break_statement: BREAK SEMI;
-continue_statement: CONTINUE SEMI;
-return_statement: RETURN expr SEMI;
-member_access: (ID | expr) DOT ID LB exprlist? RB;
+expr4
+    : expr4
+    (   ADD
+    |   SUB
+    ) expr5
+    | expr5
+    ;
 
-method_invocation_statement: member_access SEMI;
+expr5
+    : expr5
+    (   MUL
+    |   FLOAT_DIV
+    |   INT_DIV
+    |   MOD
+    ) expr6
+    | expr6
+    ;
 
-// 4.Type
+expr6
+    : expr6
+    (   CONCATENATION
+    ) expr7
+    | expr7
+    ;
 
-data_type: type_not_void | array_type | class_type;
-type_not_void: INT | FLOAT | BOOLEAN | STRING;
-array_type: type_not_void LSB INTLIT RSB;
-literal: array_lit | INTLIT | FLOATLIT | BOOLLIT | STRINGLIT;
-class_type: ID;
+expr7
+    :
+    (   NOT
+    ) expr7
+    | expr8
+    ;
 
-attribute: idlist;
-paralist: para_decl SEMI paralist | ;
-para_decl: idlist;
-idlist: (ID (EQUAL expr)?) COMMA idlist | ID (EQUAL expr)?;
+expr8
+    :
+    (   ADD
+    |   SUB
+    ) expr8
+    | expr9
+    ;
 
-// 3.Lexers
+expr9
+    : expr10 LSB expr RSB
+    | expr10
+    ;
 
-// COMMENT
+expr10
+    : expr10 bop=DOT method_call
+    | expr10 bop=DOT ID
+    | expr11
+    ;
 
-LINE_COMMAT: '#' ~[\r\n]* -> skip;
-BLOCK_COMMAT: '/*' .*? '*/' -> skip;
+expr11
+    : NEW ID LP (expr_list)? RP
+    | expr12
+    ;
 
-// KEYWORDS
+expr12
+    : literal
+    | ID
+    | THIS
+    | LP expr RP
+    | NIL
+    ;
 
+method_call: ID LP (expr_list)? RP;
+
+expr_list
+    : expr COMMA expr_list
+    | expr
+    ;
+
+/*** Literal ***/
+literal
+    : INTLIT
+    | FLOATLIT
+    | STRINGLIT
+    | BOOLLIT
+    | arrlit
+    ;
+
+arrlit: LCB literal_list RCB;
+
+literal_list
+    : literal COMMA literal_list
+    | literal
+    ;
+
+/*** COMMENT ***/
+COMMENT: (BLOCK_CMT | LINE_CMT) -> skip;
+BLOCK_CMT: '/*' .*? ('*/' | EOF);
+LINE_CMT: '#' ~([\n])* EOF?;
+
+/*** KEYWORD ***/
+
+// Primitive type
 BOOLEAN: 'boolean';
-BREAK: 'break';
-CLASS: 'class';
-CONTINUE: 'continue';
-DO: 'do';
-ELSE: 'else';
-EXTENDS: 'extends';
-FLOAT: 'float';
-IF: 'if';
 INT: 'int';
-NEW: 'new';
+FLOAT: 'float';
 STRING: 'string';
-THEN: 'then';
-FOR: 'for';
-RETURN: 'return';
 VOID: 'void';
-NIL: 'nil';
+
+// Condition keyword
+IF: 'if';
+THEN: 'then';
+ELSE: 'else';
+
+// Loop keyword
+FOR: 'for';
+TO: 'to';
+DOWNTO: 'downto';
+DO: 'do';
+BREAK: 'break';
+CONTINUE: 'continue';
+
+// Class keyword
+CLASS: 'class';
+EXTENDS: 'extends';
 THIS: 'this';
 FINAL: 'final';
 STATIC: 'static';
-TO: 'to';
-DOWNTO: 'downto';
 
-// OPERATORS
+fragment TRUE: 'true';
+fragment FALSE: 'false';
 
+// OTHERS
+NIL: 'nil';
+NEW: 'new';
+RETURN: 'return';
+
+/*** OPERATORS ***/
 ADD: '+';
 SUB: '-';
 MUL: '*';
-DIV: '/';
+FLOAT_DIV: '/';
 INT_DIV: '\\';
 MOD: '%';
-NOT_EQUAL: '!=';
+NE: '!=';
 EQUAL: '==';
 LT: '<';
 GT: '>';
-LE: '<=';
-GE: '>=';
+LTE: '<=';
+GTE: '>=';
 OR: '||';
 AND: '&&';
 NOT: '!';
 CONCATENATION: '^';
-NEW_OP: NEW;
-ASSINGMENT: ':=';
-ASSIGN: '=';
+ASSIGN: ':=';
+INIT: '=';
 
+/*** SEPARATORS ***/
 LSB: '[';
 RSB: ']';
-LP: '{';
-RP: '}';
-LB: '(';
-RB: ')';
+LCB: '{';
+RCB: '}';
+LP: '(';
+RP: ')';
 SEMI: ';';
-CL: ':';
+COLON: ':';
 DOT: '.';
 COMMA: ',';
 
-// LITERALS
+/*** LITERALS ***/
+INTLIT: DigitSequence;
 
-BOOLLIT: 'true' | 'false';
-STRINGLIT: '"' STR_CHAR* '"' {
-    self.text = self.text[:]
-};
-array_lit: LP array_declare RP;
-array_declare: expr array_list;
-array_list: COMMA expr array_list |;
-FLOATLIT: DIGIT+ DOT | DIGIT+ DOT DIGIT+ | DIGIT+ (DOT DIGIT+)? [eE] [+-]? DIGIT+ | DIGIT+ DOT [eE] [+-]? DIGIT+;
-INTLIT: DIGIT+;
-ID: [_a-zA-Z][_a-zA-Z0-9]*;
+FLOATLIT
+    : DigitSequence DecimalPart ExponentPart
+    | DigitSequence DecimalPart
+    | DigitSequence ExponentPart
+    ;
 
-// FRAGMENT
 fragment DIGIT: [0-9];
-fragment STR_CHAR: ~[\b\t\n\f\r"\\] | ESC_SEQ;
-fragment ESC_SEQ: '\\' [btnfr"\\];
-fragment ESC_ILLEGAL: '\\' ~[btnfr"\\] | '\\';
+fragment DigitSequence: DIGIT+;
+fragment Exponent: [Ee];
+fragment SIGN: [+-];
+fragment DecimalPart: DOT DigitSequence?;
+fragment ExponentPart: Exponent SIGN DigitSequence;
 
-WS: [ \t\r\f]+ -> skip;
-NEWLINE: '\n'+ -> skip;
+BOOLLIT: TRUE | FALSE;
 
-UNCLOSE_STRING: '"' STR_CHAR* {
+STRINGLIT: ('"') CHAR* ('"');
+UNCLOSE_STRING:
+	'"' CHAR* {
     raise UncloseString(self.text[:])
 };
-ILLEGAL_ESCAPE: '"' STR_CHAR* ESC_ILLEGAL {
+ILLEGAL_ESCAPE:
+	'"' CHAR* ESC_ILLEGAL {
     raise IllegalEscape(self.text[:])
 };
 
-ERROR_CHAR:
-	. {
-		raise ErrorToken(self.text)
-	};
+fragment CHAR
+    :  ~[\b\t\n\f\r"\\]
+    | ESCAPE_SEQUENCE
+    ;
+fragment ESCAPE_SEQUENCE
+    : '\\b'
+    | '\\f'
+    | '\\r'
+    | '\\n'
+    | '\\t'
+    | '\\"'
+    | '\\\\'
+    ;
+fragment ESC_ILLEGAL
+    : '\\' ~[btnfr"\\]
+    | '\\'
+    ;
+
+ID: [_A-Za-z][_A-Za-z0-9]*;
+
+WS : [ \t\r\n]+ -> skip ; // skip spaces, tabs, newlines
+
+ERROR_CHAR: . {raise ErrorToken(self.text)};

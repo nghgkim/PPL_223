@@ -1,4 +1,3 @@
 
-    <!-- begin& wsf_resource_nodes -->
-    <!-- end: wsf_resource_nodes -->
-                
+    class ObjectComparison{s void main(ArrayString args){}}
+        

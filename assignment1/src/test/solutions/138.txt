@@ -1,1 +1,1 @@
-Illegal,"",<EOF>
+int,num,=,Rand,.,GetRandomInt,(,),;,return,(,num,%,2,),==,0,;,<EOF>

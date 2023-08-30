@@ -1,5 +1,3 @@
 
-            ""
-            12 32.43 43.E12 4e-1 true "false" false "012" 1.32 1.
-            "String"
-            
+    SearchLinkedList sList = new SearchLinkedList();sList.addNode(1);sList.addNode(2);sList.addNode(4);
+        

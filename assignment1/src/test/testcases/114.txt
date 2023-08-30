@@ -1,5 +1,9 @@
 
-    /* /* # // /b/r/n */ */
-    /*/* This is a block comment so # has no meaning here*/ */
-    # This is comment
-                
+    void addNode(int data) {
+Node newNode = new Node(data);
+if head == nil then {
+head := newNode;
+tail := newNode;
+}
+}
+        

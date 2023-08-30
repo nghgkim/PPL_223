@@ -1,1 +1,1 @@
-cost,=,sum,(,(,y,-,h,(,i,),),*,*,2,),<EOF>
+if,flag,then,io,.,writeStrLn,(,"Expression is true",),;,<EOF>

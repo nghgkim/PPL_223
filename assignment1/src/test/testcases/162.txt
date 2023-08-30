@@ -1,3 +1,6 @@
 
-    + - * / \ % != == < > <= >= || && ! ^ new
-                
+    var shortcut = nil;
+if this.shortcutMap.ContainsKey(ruleId) then
+    shortcut := this.shortcutMap[ruleId];
+if (shortcut == nil) || (shortcut.Count <= 0) then {continue;}
+        

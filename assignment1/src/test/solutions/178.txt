@@ -1,1 +1,1 @@
-acc,a,+,+,;,string,a,=,"a",;,<EOF>
+self,.,check,(,"\\ud800\\udc61(?<groupName>(?<=(\\ud800\\udc61))b|is_primitive_literal)",),;,<EOF>

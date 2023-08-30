@@ -1,4 +1,3 @@
 
-    "abc - xyz"
-    "abc \ xyz"
-                
+    io.print(StringEscapeUtils.escape("Hello\r\n\tW\"o\"rld\n"));
+        

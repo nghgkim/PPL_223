@@ -1,2 +1,3 @@
- "String with newline
-after newline" 
+
+    io.format(" The Area of a Rectangle = %.2f\n", Area);
+        

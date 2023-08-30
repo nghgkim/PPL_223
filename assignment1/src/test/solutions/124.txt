@@ -1,1 +1,1 @@
-TRUE,True,TRue,TRUe,falSe,falSE,FAlse,FAlsE,truE,False,FAlSE,<EOF>
+for,i,:=,2,to,count,do,{,n3,:=,n1,+,n2,;,io,.,print,(," ",+,n3,),;,n1,:=,n2,;,n2,:=,n3,;,},<EOF>

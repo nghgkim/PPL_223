@@ -1,1 +1,1 @@
-hakasjdklsajdkla,*,(,),*,),%,!,+,+,(,+,),Error Token |
+(," The ASCII value of ",+,i,.,toChar,(,),+,"=",+,i,),;,<EOF>

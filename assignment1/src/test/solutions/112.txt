@@ -1,1 +1,1 @@
-<EOF>
+void,setSize,(,int,size,),{,this,.,banana_count,:=,size,;,},int,main,(,),{,return,0,;,},<EOF>

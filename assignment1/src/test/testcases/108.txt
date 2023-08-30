@@ -1,4 +1,5 @@
 
-    # inline comment
-    # inline comment
-                
+        Banana(int size) {
+        this.banana := new Banana(size);
+        this.banana_count := banana;
+    }

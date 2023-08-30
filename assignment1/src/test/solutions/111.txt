@@ -1,1 +1,1 @@
-<EOF>
+class,Main,{,void,show,(,),{,System,.,out,.,println,(,"Welcome to BKOOL",),;,},},<EOF>

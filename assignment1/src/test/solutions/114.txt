@@ -1,1 +1,1 @@
-*,/,*,/,<EOF>
+void,addNode,(,int,data,),{,Node,newNode,=,new,Node,(,data,),;,if,head,==,nil,then,{,head,:=,newNode,;,tail,:=,newNode,;,},},<EOF>

@@ -1,6 +1,3 @@
 
-        if flag then
-            a:=1
-        else
-            a:=2
-                
+    /* Retrieves user data */ # must be negative
+        

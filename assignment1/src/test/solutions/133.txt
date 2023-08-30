@@ -1,1 +1,1 @@
-"",abc,<EOF>
+else,{,tail,.,next,:=,newNode,;,tail,:=,newNode,;,},<EOF>

@@ -1,1 +1,1 @@
-Error Token '
+"before_install:\n- echo \"Before Install\"\n- ./ensure-java-16 install","install:\n - echo \"Install\"\n - if ! ./ensure-java-16 use; then source ~/.sdkman/bin/sdkman-init.sh; fi\n- java -version",<EOF>

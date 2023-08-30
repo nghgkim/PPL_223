@@ -1,1 +1,1 @@
-false,FALse,FOR,FOr,If,iF,While,WHILE,contiNue,CONTInue,Break,break,<EOF>
+for,i,:=,1,to,100,do,{,io,.,writeIntLn,(,i,),;,Intarray,[,i,],:=,i,+,1,;,},<EOF>

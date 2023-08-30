@@ -1,1 +1,3 @@
-BOOLEAN int 1.12INTEGER sTRIng not 12and
+
+    self.assertEquals(Arrays.asList(new Integer[]{ExprLexer.ID, ExprLexer.EQUAL}), candidates.tokens.get(ExprLexer.VAR));
+        

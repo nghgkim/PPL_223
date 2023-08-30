@@ -1,1 +1,1 @@
-class,Example1,{,int,factorial,(,int,n,),{,if,n,==,0,then,return,1,;,else,return,n,*,this,.,factorial,(,n,-,1,),;,},void,main,(,),{,int,x,;,x,:=,io,.,readInt,(,),;,io,.,writeIntLn,(,this,.,factorial,(,x,),),;,},},<EOF>
+fd2,:=,io,.,open,(,"/dev/null",,,O_CREAT,||,O_TRUNC,||,O_WRONLY,,,S_IWUSR,||,S_IWOTH,),;,<EOF>

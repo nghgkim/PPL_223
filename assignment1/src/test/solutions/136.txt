@@ -1,1 +1,1 @@
-Unclosed String: " hello lexer 
+for,i,:=,10,to,201,do,{,if,(,i,%,7,==,0,),&&,(,i,%,5,!=,0,),then,{,list,.,add,(,i,),;,},},<EOF>

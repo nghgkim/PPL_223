@@ -1,6 +1,3 @@
 
-                #  abc
-                /* // */ acc
-                a++;
-                string a = "a";
-                
+    self.check("\\ud800\\udc61(?<groupName>(?<=(\\ud800\\udc61))b|is_primitive_literal)");
+        

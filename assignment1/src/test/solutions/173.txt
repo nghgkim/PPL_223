@@ -1,1 +1,1 @@
-"o|F&)LqX",+,>,X,+,Unclosed String: "#Fft
+void,foo,(,_Int,[,5,],a,,,_Int,b,),{,var,i,=,0,;,for,i,:=,0,to,5,do,{,a,[,i,],:=,b,+,10,;,},},<EOF>

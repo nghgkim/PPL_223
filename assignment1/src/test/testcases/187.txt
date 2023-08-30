@@ -1,5 +1,3 @@
 
-    # [,<>,( k6301 with begin,],true
-    + - integer N0699 + > then L09e7 >= float > >= , ] <> * eb142 > integer / while boolean procedure false
-    (* false for Z2262,do,G9a7c continue e46e2,+,break*)
-                
+    float getInterpolation(float t) {t := t - 1.0;return t * t * t * t * t + 1.0;}
+        

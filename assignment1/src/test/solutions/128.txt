@@ -1,1 +1,1 @@
-"","String"," ","?","-","//","Mulitiple Characters",<EOF>
+s,void,main,(,StringArray,args,),{,io,.,print,(,"Hello, World!",),;,},<EOF>

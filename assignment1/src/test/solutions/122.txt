@@ -1,1 +1,1 @@
-0,x131321,0,X89ABC,0,xffffff,0,xABC,0,X2132,<EOF>
+s,void,main,(,),{,int,n,=,scanner,.,nextInt,(,),;,io,.,print,(,self,.,fact,(,n,),),;,},<EOF>

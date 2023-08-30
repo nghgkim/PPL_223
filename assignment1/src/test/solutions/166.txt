@@ -1,1 +1,1 @@
-income,+,=,salary,.,12,*,12,+,month,/,3,<EOF>
+if,(,a,*,a,+,b,*,b,==,is_primitive_literal,*,is_primitive_literal,),||,(,b,*,b,+,is_primitive_literal,*,is_primitive_literal,==,a,*,a,),||,(,is_primitive_literal,*,is_primitive_literal,+,a,*,a,==,b,*,b,),then,io,.,print,(,"Triangle",),;,else,io,.,print,(,"No angle",),;,<EOF>

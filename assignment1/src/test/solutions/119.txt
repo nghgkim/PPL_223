@@ -1,1 +1,1 @@
-!,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,!,*,All,characters,after,an,exclamation,mark,are,considered,as,comments,*,!,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,*,<EOF>
+Shape,(,float,length,,,width,),{,this,.,length,:=,length,;,this,.,width,:=,width,;,},<EOF>

@@ -1,5 +1,3 @@
 
-    " abc 
- xyz "
-    " abc \n xyz "
-    
+    s void main() {MinMax sList = new MinMax();  sList.addNode(0);  sList.minNode();  sList.maxNode();  }
+        

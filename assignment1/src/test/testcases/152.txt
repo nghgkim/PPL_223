@@ -1,3 +1,3 @@
 
-    a = a ~ 1
-                
+    io.app build log := "https://web.com/abc123"
+        

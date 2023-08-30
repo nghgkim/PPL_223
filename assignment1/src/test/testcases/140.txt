@@ -1,3 +1,1 @@
-
-    " Hi Hi \s\d\f "
-                
+int count = 0; String str = "Banana,\n carrot,\n potato.";
