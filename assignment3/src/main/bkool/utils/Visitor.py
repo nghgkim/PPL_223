@@ -115,6 +115,9 @@ class Visitor(ABC):
         pass 
 
 class BaseVisitor(Visitor):
+
+    def visit(self, ast, param):
+        return ast.accept(self, param)
       
     def visitProgram(self, ast, param):
         return None
